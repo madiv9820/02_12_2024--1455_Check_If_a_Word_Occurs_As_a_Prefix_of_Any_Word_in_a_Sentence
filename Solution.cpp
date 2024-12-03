@@ -32,8 +32,10 @@ public:
                     }
 
                     // If we've matched the whole searchWord, update searchWordIndex
-                    if(tempIndex == searchWord.length()) 
+                    if(tempIndex == searchWord.length())  {
                         searchWordIndex = min(searchWordIndex, index + 1);
+                        break;  // Found the first match, no need to check further words
+                    }
                 }
 
                 // Reset currentWord for the next word in the sentence
@@ -46,7 +48,7 @@ public:
         }
 
         // After the loop, we may still have a word left to check (last word in the sentence)
-        if(searchWord[0] == currentWord[0]) {
+        if(searchWordIndex == numeric_limits<int>::max() && searchWord[0] == currentWord[0]) {
             int tempIndex = 0; // Temporary index to compare characters of searchWord and currentWord
             
             // Compare characters of searchWord with currentWord to check if it's a prefix
@@ -57,8 +59,9 @@ public:
             }
 
             // If we've matched the whole searchWord, update searchWordIndex
-            if(tempIndex == searchWord.length())
+            if(tempIndex == searchWord.length()) {
                 searchWordIndex = min(searchWordIndex, index + 1);
+            }
         }
 
         // If we found a valid index, return it; otherwise return -1 indicating no match
@@ -69,5 +72,6 @@ public:
 int main() {
     string sentence = "i love eating burger", searchWord = "burg";
     Solution sol;
+    // Call the function and print the result
     cout << sol.isPrefixOfWord(sentence, searchWord) << endl;
 }
