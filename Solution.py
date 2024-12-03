@@ -24,6 +24,7 @@ class Solution:
                 if tempIndex == len(searchWord):
                     # Update the result with the current word index (1-based index)
                     searchWordIndex = min(searchWordIndex, index + 1)
+                    break
 
         # If we found a matching word, return the 1-based index of the word, otherwise return -1
         return searchWordIndex if searchWordIndex != float('inf') else -1
